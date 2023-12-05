@@ -1,0 +1,179 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+
+using System.Data.OleDb;
+using System.Data.SqlClient;
+namespace WindowsFormsApplication10
+{
+    public partial class ViewPatient : Form
+    {
+        SqlConnection con = new SqlConnection(@"Data Source=DESKTOP-C2HP2P0\SQLEXPRESS;Initial Catalog=BLOOD BANK;Integrated Security=True");
+
+        public ViewPatient()
+        {
+            InitializeComponent(); 
+            
+
+           
+        } 
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            BloodStock  button3 = new BloodStock();
+            button3.Show(); 
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            Patient button5 = new Patient();
+            button5.Show();
+        }
+
+        private void ViewPatient_Load(object sender, EventArgs e)
+        {
+            // TODO: This line of code loads data into the 'bLOOD_BANKDataSet4.Patient' table. You can move, or remove it, as needed.
+            this.patientTableAdapter.Fill(this.bLOOD_BANKDataSet4.Patient);
+
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            con.Open();
+            SqlCommand cmd = con.CreateCommand();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = "select * from reg where Name=('" + textBox1.Text + "','" + textBox2.Text + "','" + textBox3.Text + "','" + comboBox1.Text + "','" + comboBox2.Text + "','" + textBox4.Text + "')";
+            cmd.ExecuteNonQuery();
+            DataTable dt = new DataTable();
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            da.Fill(dt);
+            dataGridView1.DataSource = dt;
+            con.Close();
+  
+        }
+
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            comboBox2.Items.Add("A+");
+            comboBox2.Items.Add("O+"); 
+            comboBox2.Items.Add("B+");
+            comboBox2.Items.Add("AB+");
+            comboBox2.Items.Add("A-");
+            comboBox2.Items.Add("O-");
+            comboBox2.Items.Add("AB-");
+            comboBox2.Items.Add("B-");
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            comboBox1.Items.Add("Male");
+            comboBox1.Items.Add("Female");
+            comboBox1.Items.Add("Other Gender");
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            
+            con.Open();
+            SqlCommand cmd = con.CreateCommand();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = "delete from Patient where Name=('"+textBox1.Text+"')";
+            cmd.ExecuteNonQuery();
+            con.Close();
+            MessageBox.Show("record delete successfully");
+            
+        
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            con.Open();
+            SqlCommand cmd = con.CreateCommand();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = "update Patient set name='" + textBox1.Text + "'where age='"+textBox2.Text+"'";
+            cmd.ExecuteNonQuery();
+            con.Close();
+            MessageBox.Show("record update successfully");          
+            
+        
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+        
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+                       
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox4_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+            Donor label3 = new Donor();
+            label3.Show();
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+            ViewDonor label5 = new ViewDonor();
+            label5.Show();
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+            Patient label4 = new Patient();
+            label4.Show();
+        }
+
+        private void label7_Click(object sender, EventArgs e)
+        {
+            BloodStock label7 = new BloodStock();
+            label7.Show();
+        }
+
+        private void label8_Click(object sender, EventArgs e)
+        {
+            BloodTransfert label8 = new BloodTransfert();
+            label8.Show();
+        }
+
+        private void label9_Click(object sender, EventArgs e)
+        {
+            Dashboard label9 = new Dashboard();
+            label9.Show();
+        }
+
+        private void label10_Click(object sender, EventArgs e)
+        {
+            View_Blood_Transfert label10 = new View_Blood_Transfert();
+            label10.Show();
+        }
+    }
+}
