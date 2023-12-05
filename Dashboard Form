@@ -1,0 +1,250 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using System.Data.SqlClient;
+
+namespace WindowsFormsApplication10
+{
+    public partial class Dashboard : Form
+    {
+        //SqlConnection con = new SqlConnection(@"Data Source=DESKTOP-C2HP2P0\SQLEXPRESS;Initial Catalog=BLOOD BANK;Integrated Security=True");
+        public Dashboard()
+        {
+            InitializeComponent();
+            GetData();
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            View_Blood_Transfert button1 = new View_Blood_Transfert();
+            button1.Show();
+        }
+
+        private void label10_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void label8_Click(object sender, EventArgs e)
+        {
+            BloodTransfert label8 = new BloodTransfert();
+            label8.Show();
+        }
+        SqlConnection con = new SqlConnection(@"Data Source=DESKTOP-C2HP2P0\SQLEXPRESS;Initial Catalog=BLOOD BANK;Integrated Security=True");
+        private void GetData()
+        {
+            con.Open();
+            SqlDataAdapter sda = new SqlDataAdapter("select count(BloodGroup) from reg", con);
+            DataTable dt = new DataTable();
+            sda.Fill(dt);
+            textBox1.Text = dt.Rows[0][0].ToString();
+            con.Close();
+
+
+                       
+            
+            
+        }
+       
+            
+
+        private void Dashboard_Load(object sender, EventArgs e)
+            
+        {
+             
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+            Donor label3 = new Donor();
+            label3.Show();
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+            ViewDonor label5 = new ViewDonor();
+            label5.Show();
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+            Patient label4 = new Patient();
+            label4.Show();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            con.Open();
+            SqlCommand cmd = con.CreateCommand();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = "select * from reg where BloodGroup=('" + textBox1.Text + "')";
+            cmd.ExecuteNonQuery();
+            DataTable dt = new DataTable();
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            da.Fill(dt);
+            
+            con.Close();
+         }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+            ViewPatient label6 = new ViewPatient();
+            label6.Show();
+        }
+
+        private void label7_Click(object sender, EventArgs e)
+        {
+            BloodStock label7 = new BloodStock();
+            label7.Show();
+        }
+
+        private void label9_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            this.timer1.Start();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            this.progressBar1.Increment(1);
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void progressBar1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            
+
+        }
+
+        private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void timer3_Tick(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void button6_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label17_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox3_TextChanged_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button6_Click_2(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void textBox2_TextChanged_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label24_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox5_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label18_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label19_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label20_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox6_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox8_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label10_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label24_Click_1(object sender, EventArgs e)
+        {
+            View_Blood_Transfert label24 = new View_Blood_Transfert();
+            label24.Show();
+        }
+    }
+}
