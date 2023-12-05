@@ -1,0 +1,165 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using System.Data.OleDb;
+using System.Data.SqlClient;
+
+namespace WindowsFormsApplication10
+{
+    public partial class Patient : Form
+    {
+        SqlConnection con = new SqlConnection(@"Data Source=DESKTOP-C2HP2P0\SQLEXPRESS;Initial Catalog=BLOOD BANK;Integrated Security=True");
+        public Patient()
+        {
+            InitializeComponent();
+        }
+
+        private void label12_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+            con.Open();
+            SqlCommand cmd = con.CreateCommand();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = "insert into Patient values('" + textBox1.Text + "','" + textBox3.Text + "','"+ textBox2.Text +"','" + comboBox1.Text + "','" + comboBox2.Text + "','" + textBox4.Text + "')";
+            cmd.ExecuteNonQuery();
+            con.Close();
+            MessageBox.Show("record inserted successfully");
+            
+         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            ViewPatient button2 = new ViewPatient();
+            button2.Show();
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            ViewDonor button3 = new ViewDonor();
+            button3.Show();
+        }
+
+        private void label10_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void Patient_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            comboBox2.Items.Add("A+");
+            comboBox2.Items.Add("O+"); 
+            comboBox2.Items.Add("B+");
+            comboBox2.Items.Add("AB+");
+            comboBox2.Items.Add("A-");
+            comboBox2.Items.Add("O-");
+            comboBox2.Items.Add("AB-");
+            comboBox2.Items.Add("B-");
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            comboBox1.Items.Add("Male");
+            comboBox1.Items.Add("Female");
+            comboBox1.Items.Add("Other Gender");
+ 
+        }
+
+        private void label9_Click(object sender, EventArgs e)
+        {
+            Dashboard label9 = new Dashboard();
+            label9.Show();
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox4_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel4_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+            Donor label3 = new Donor();
+            label3.Show();
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+            ViewDonor label5 = new ViewDonor();
+            label5.Show();
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+            ViewPatient label6 = new ViewPatient();
+            label6.Show();
+        }
+
+        private void label7_Click(object sender, EventArgs e)
+        {
+            BloodStock label7 = new BloodStock();
+            label7.Show();
+        }
+
+        private void label8_Click(object sender, EventArgs e)
+        {
+            BloodTransfert label8 = new BloodTransfert();
+            label8.Show();
+        }
+
+        private void label15_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label10_Click_1(object sender, EventArgs e)
+        {
+            View_Blood_Transfert label10 = new View_Blood_Transfert();
+            label10.Show();
+        }
+    }
+}
