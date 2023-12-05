@@ -1,0 +1,73 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using System.Data.SqlClient;
+
+namespace WindowsFormsApplication10
+{
+    public partial class Login : Form
+    {
+        public Login()
+        {
+            InitializeComponent();
+        }
+
+        private void Login_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            SqlConnection con = new SqlConnection(@"Data Source=DESKTOP-C2HP2P0\SQLEXPRESS;Initial Catalog=BLOOD BANK;Integrated Security=True");
+            string query = "select * from Login where Username='" + textBox1.Text.Trim() + "' and Password='" + textBox2.Text.Trim() + "'";
+            SqlDataAdapter sda = new SqlDataAdapter(query, con);
+            DataTable dtbl = new DataTable();
+            sda.Fill(dtbl);
+            if (dtbl.Rows.Count == 1)
+            {
+                Mainform button1 = new Mainform();
+                this.Hide();
+                button1.Show();
+            }
+            else
+            {
+                MessageBox.Show("Invalid Details");
+            }
+        }
+        private void textBox1_validation(object sender, EventArgs e)
+        {
+            if (textBox1.Text == string.Empty)
+            {
+                MessageBox.Show("empty");
+            }
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+       
+    }
+}
